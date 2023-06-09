@@ -27,7 +27,7 @@ app.use("/images", express.static("images"));
 
 // Have Node serve the files for our built React app
 // app.use(express.static(path.resolve(__dirname, "../client/build")));
-app.use(express.static(path.join(__dirname, "../build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -144,7 +144,7 @@ app.get("/api/passcodeLogin", (req, res) => {
 // All other GET requests not handled before will return our React app
 app.get("*", (req, res) => {
   // res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-  res.sendFile(path.join(__dirname, "../build/index.html"));
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 app.listen(PORT, () => {
