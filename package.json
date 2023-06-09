@@ -6,6 +6,7 @@
   "license": "MIT",
   "author": "Microsoft",
   "scripts": {
+    "frontend": "cd client && npm install --legacy-peer-deps && npm run build && npm start",
     "start": "node server/app.js",
     "lint": "eslint",
     "format": "prettier --single-quote --write *.js"
