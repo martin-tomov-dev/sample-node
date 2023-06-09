@@ -35,7 +35,7 @@ function Main() {
       toast.warn("Email type is invalid");
     } else {
       fetchData({
-        url: "http://localhost:3001/api/subscribe",
+        url: "https://samplenodedeploy.azurewebsites.net/api/subscribe",
         body: { ...subscribeInfo },
         method: "POST",
       })
