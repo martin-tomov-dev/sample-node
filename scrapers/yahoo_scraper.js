@@ -425,7 +425,7 @@ function yahoo_scraper(config) {
           ? 0
           : spread_data.moneyline_handled || 0
       }',
-      'YahooSs',
+      'YahooSports',
       '${current_time}')`;
 
     executeSQL(sql, (err, data) => {
