@@ -6,7 +6,7 @@
     "license": "MIT",
     "author": "Microsoft",
     "scripts": {
-        "start": "node index.js",
+        "start": "node server/index.js",
         "lint": "eslint",
         "format": "prettier --single-quote --write *.js"    
     },
