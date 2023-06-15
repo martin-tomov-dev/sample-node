@@ -1,64 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import config from '../data.config.json';
-import Datatable from '../components/Datatable';
-import useFetch from '../hooks/useFetch';
-import { useContext } from 'react';
-import { FilterContext } from '../context/FilterContext';
 
-function DataPage() {
-  const [matchData, setMatchData] = useState([]);
-  const [unfilterdData, setUnfilterdData] = useState([]);
-  const [game, setGame] = useState('NBA');
-  const { fetchData } = useFetch();
-  const { filters } = useContext(FilterContext);
-
+function HowToUse() {
   const main = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const configData = config.DataPage;
+  const configData = config.HowToUse;
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setTimeout(() => { setIsLoading(false) }, 3000);
-  }, []);
-
-  useEffect(() => {
-    fetchData({
-      url: 'http://localhost:3001/api/getAggregatedData?sport=' + game,
-      method: 'GET',
-    })
-      .then((result) => {
-        if (result.status) {
-          setMatchData(result.data);
-          setUnfilterdData(result.data);
-        }
-      })
-  }, [fetchData, game]);
-
-  const applyFilters = () => {
-    let filteredData = unfilterdData.filter((match) => {
-      let show_match = false;
-      match[Object.keys(match)[0]].forEach((match_detail) => {
-        show_match =
-          show_match ||
-          (filters.spread.bets.min <= match_detail.SpreadBets &&
-            match_detail.SpreadBets <= filters.spread.bets.max &&
-            filters.spread.handled.min <= match_detail.SpreadHandled &&
-            match_detail.SpreadHandled <= filters.spread.handled.max &&
-            filters.moneyline.bets.min <= match_detail.MoneylineBets &&
-            match_detail.MoneylineBets <= filters.moneyline.bets.max &&
-            filters.moneyline.handled.min <= match_detail.MoneylineHandled &&
-            match_detail.MoneylineHandled <= filters.moneyline.handled.max &&
-            filters.total.bets.min <= match_detail.TotalBets &&
-            match_detail.TotalBets <= filters.total.bets.max &&
-            filters.total.handled.min <= match_detail.TotalHandled &&
-            match_detail.TotalHandled <= filters.total.handled.max);
-      });
-      return show_match;
-    });
-    setMatchData(filteredData);
-  };
 
   return (
     <div className="relative w-full h-fit">
@@ -68,11 +17,10 @@ function DataPage() {
             <h1 className="sm:text-5xl text-3xl font-bold my-2 sm:pl-8 pl-4 py-2 cursor-pointer"
               onClick={() => { navigate('/') }} >Split Action</h1>
           </div> */}
-        <img src="/imgs/header.JPG" className="w-full" />
-
+          <img src="/imgs/header.JPG" className="w-full" />
           <div className="bg-gradient-to-r from-[#3cdf1f] to-gray-900 h-10 w-full text-white rounded justify-end flex">
-            <button className="mr-4 text-[#3cdf1f] font-bold hover:opacity-70" onClick={() => { navigate('/page-three') }}>
-              How to Use</button>
+            <button className="mr-4 text-[#3cdf1f] font-bold hover:opacity-70" onClick={() => { navigate('/data') }}>
+              Splits Data</button>
           </div>
         </div>
         {
@@ -103,7 +51,6 @@ function DataPage() {
                       <img src={configData?.middleBanners[1].src} className='w-2/3 sm:w-[250px] aspect-ratio rounded' alt="" />
                     </a>
                   </div>
-                  <Datatable matches={matchData} applyFilters={applyFilters} setGame={setGame} game={game} />
                   <div className="text-white mt-6 p-4 rounded text-sm sm:text-base text-justify">
                     WYG provides valuable sports wagering consensus data to utilize along with your other sports analysis.<br /><br />
 
@@ -190,4 +137,4 @@ function DataPage() {
   )
 }
 
-export default DataPage;
+export default HowToUse;
